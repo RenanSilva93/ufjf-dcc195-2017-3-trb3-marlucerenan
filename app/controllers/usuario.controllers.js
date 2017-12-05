@@ -70,7 +70,13 @@ module.exports.removeUsuario = function(req, res, next){
 module.exports.listarUsuarioHtml = function(req, res, next){
   Usuario.find({}).then(
     function(usuarios){
-      res.render('usuario/listar',{usuarios: usuarios});
+      res.render('usuario/listar',{usuarios: usuarios}, {principal : [
+    {rota:"HOME/",link :"/"},
+    {rota:"index.html",link :"/index.html"},
+    {rota:"Sobre",link :"/sobre.html"},
+	{rota:"Usuario",link :"/usuario.html"},
+	{rota:"Compras",link :"/compras.html"},
+  ]});
     },
     function(err){
       return next(err);
