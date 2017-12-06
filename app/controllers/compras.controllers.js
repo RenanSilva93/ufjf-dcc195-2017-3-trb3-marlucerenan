@@ -10,3 +10,14 @@ module.exports.compras = function(req,res,next){
   ]});
   }
 }
+
+module.exports.listarCompras = function(req,res,next){
+  Compras.find({}).then(
+   function(Compras){
+     res.render('compras/listarCompras',
+	 {'compras': Compras,'usuarioLogado':req.session.usuarioLogado});
+   },
+   function(err){
+     return next(err);
+   });
+}

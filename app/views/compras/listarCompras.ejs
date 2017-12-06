@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+  <title>Trabalho 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%if(usuarioLogado){%>
+        <h5>Logado como: <%=usuarioLogado.nome%></h5>
+    <%}%>
+    <a href="/index.html">Home</a>
+    <h1>Lista de comprass</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <td>Nome do compras</td>
+          <td>Preco</td>
+          <td>
+            <form action="/compras/novo.html" method="get">
+              <input type="submit" value="Adicionar"/>
+            </form>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+        for (var i in compras){
+          var compras = compras[i];
+        %>
+        <tr>
+          <td><%=compras.nome%></td>
+          <td><%=pcompras.preco%></td>
+          <td><a href="/compras/detalhes.html?id=<%=compras._id%>">Detalhes</a></td>
+          <%if(usuarioLogado){%>
+              <td><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
+          <%}%>
+        </tr>
+      <% } %>
+      </tbody>
+</table>
+
+</body>
+</html>
