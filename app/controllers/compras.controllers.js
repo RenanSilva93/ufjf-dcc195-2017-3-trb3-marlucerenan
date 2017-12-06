@@ -1,3 +1,4 @@
+var Compras  = require('mongoose').model('Compras') 
 module.exports.compras = function(req,res,next){
   if(req.method=='GET'){
       res.render('compras/compras', {principal : [
@@ -6,6 +7,6 @@ module.exports.compras = function(req,res,next){
     {rota:"Sobre",link :"/sobre.html"},
 	{rota:"Usuario",link :"/usuario.html"},
 	{rota:"Compras",link :"/compras.html"},
-  ]}); 
+  ]});
   }
 }

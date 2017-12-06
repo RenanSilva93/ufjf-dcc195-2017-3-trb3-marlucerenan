@@ -2,11 +2,11 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-var ProdutoSchema = new Schema({
+var ComprasSchema = new Schema({
   nome: String,
   preco_base: Number,
   preco: Number,
   somaInteresse: Number,
   numeroInteresse :Number,
 })
-mongoose.model('Produto',ProdutoSchema)
+mongoose.model('Compras',ComprasSchema)
