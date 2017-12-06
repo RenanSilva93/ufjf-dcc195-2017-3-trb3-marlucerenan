@@ -19,7 +19,7 @@
           <td>Nome do compras</td>
           <td>Preco</td>
           <td>
-            <form action="/compras/novo.html" method="get">
+            <form action="/compras/nova_compras.html" method="get">
               <input type="submit" value="Adicionar"/>
             </form>
           </td>
@@ -32,7 +32,7 @@
         %>
         <tr>
           <td><%=compras.nome%></td>
-          <td><%=pcompras.preco%></td>
+          <td><%=compras.preco%></td>
           <td><a href="/compras/detalhes.html?id=<%=compras._id%>">Detalhes</a></td>
           <%if(usuarioLogado){%>
               <td><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
