@@ -32,7 +32,6 @@ module.exports = function(){
   app.use(express.static('./public'));
   require("../app/routes/compras.routes")(app);
   require("../app/routes/usuario.routes")(app);
-  require("../app/routes/sobre.routes")(app);
   require("../app/routes/index.routes")(app);
   return app;
 }
