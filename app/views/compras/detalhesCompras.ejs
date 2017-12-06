@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+  <title>Trabalho 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ <body>
+    <%if(usuarioLogado){%>
+        <h5>Logado como: <%=usuarioLogado.nome%></h5>
+    <%}%>
+    <h1>Detalhes da Compra</h1>
+    <table>
+      <tr>
+        <h2>Nome: <%=compras.nome%><br>
+            Valor Base: <%=compras.preco_base%><br>
+            Preco: <%=compras.preco%>
+             </h2>
+      </tr>
+    <tr>
+      <td>
+        <form action="/compras/excluir_compras.html" method="post">
+          <input type="submit" value="Excluir" />
+          <input type="hidden" name="id" value="<%=compras._id%>"/>
+        </form>
+      </td>
+      <td>
+        <form action="/compras/alterar_compras.html" method="GET">
+          <input type="submit" value="Alterar" />
+          <input type="hidden" name="id" value="<%=compras._id%>"/>
+        </form>
+      </td>
+    </tr>
+  </table>
+
+    <table border="1">
+    <tr>
+      <td>Nome Usuário</td>
+      <td>Valor de Interesse</td>
+    </tr>
+    <%for(var i in compras.interesses){
+          var interessado = compras.interesses[i]%>
+          <tr>
+            <td><%=interessado.usuario%></td>
+            <td><%=interessado.valor%></td>
+          </tr>
+     <%}%>
+    </table>
+    <h2>Soma dos Interesses: <%=compras.somaInteresse%></h2>
+</body>
+</html>

@@ -86,3 +86,15 @@ function salvarCompras(compras){
     }
   );
 }
+
+module.exports.detalheCompras = function(req,res,next){
+    Compras.findOne(
+    {"_id": req.query.id}).then(
+      function(Compras´) {
+        res.render('compras/detalheCompras', {'Compras': Compras, 'usuarioLogado':req.session.usuarioLogado});
+      },
+      function (err){
+        next(err);
+      }
+    );
+}
