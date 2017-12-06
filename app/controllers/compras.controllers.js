@@ -1,4 +1,4 @@
-var Compras  = require('mongoose').model('Compras') 
+var Compras  = require('mongoose').model('Compras')
 module.exports.compras = function(req,res,next){
   if(req.method=='GET'){
       res.render('compras/compras', {principal : [
@@ -24,7 +24,7 @@ module.exports.listarCompras = function(req,res,next){
 
 module.exports.novaCompras = function(req, res, next) {
   if(req.method=='GET'){
-   res.render('compras/novo',{'usuarioLogado':req.session.usuarioLogado});
+   res.render('compras/novaCompras',{'usuarioLogado':req.session.usuarioLogado});
  }else {
    var novo = new Compras(req.body);
    novo.save().then(
