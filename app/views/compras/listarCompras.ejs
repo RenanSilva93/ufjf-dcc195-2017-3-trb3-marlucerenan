@@ -33,7 +33,7 @@
         <tr>
           <td><%=compras.nome%></td>
           <td><%=compras.preco%></td>
-          <td><a href="/compras/detalhes.html?id=<%=compras._id%>">Detalhes</a></td>
+          <td><a href="/compras/detalhe_compras.html?id=<%=compras._id%>">Detalhes</a></td>
           <%if(usuarioLogado){%>
               <td><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
           <%}%>

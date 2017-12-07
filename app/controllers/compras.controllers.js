@@ -1,4 +1,4 @@
-var Compras  = require('mongoose').model('Compras')
+var Compras = require('mongoose').model('Compras')
 module.exports.compras = function(req,res,next){
   if(req.method=='GET'){
       res.render('compras/compras', {principal : [
@@ -13,9 +13,11 @@ module.exports.compras = function(req,res,next){
 
 module.exports.listarCompras = function(req,res,next){
   Compras.find({}).then(
-   function(Compras){
+
+   function(compras){
+    console.log(compras);
      res.render('compras/listarCompras',
-	 {'compras': Compras,'usuarioLogado':req.session.usuarioLogado});
+	 {'compras': compras,'usuarioLogado':req.session.usuarioLogado});
    },
    function(err){
      return next(err);
@@ -90,8 +92,8 @@ function salvarCompras(compras){
 module.exports.detalheCompras = function(req,res,next){
     Compras.findOne(
     {"_id": req.query.id}).then(
-      function(Compras´) {
-        res.render('compras/detalheCompras', {'Compras': Compras, 'usuarioLogado':req.session.usuarioLogado});
+      function(Compras) {
+        res.render('compras/detalheCompras', {'compras': Compras, 'usuarioLogado':req.session.usuarioLogado});
       },
       function (err){
         next(err);
