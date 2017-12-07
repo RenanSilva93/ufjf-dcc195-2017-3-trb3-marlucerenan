@@ -3,6 +3,8 @@ module.exports = function (app) {
   app.use('/usuario.html', handlers.listarUsuarioHtml);
   app.use('/cadastro-usuario.html', handlers.cadastrarUsuarioHtml);
   app.use('/detalhes-usuario.html', handlers.detalhesUsuarioHtml);
+  app.use('/login.html', handlers.login);
+  app.use('/logout.html', handlers.logout)
   app.route('/usuario')
     .post(handlers.novoUsuario)
     .get(handlers.listarUsuario);

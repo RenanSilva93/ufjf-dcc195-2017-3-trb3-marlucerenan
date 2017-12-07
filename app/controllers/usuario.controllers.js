@@ -109,8 +109,29 @@ module.exports.detalhesUsuarioHtml = function(req, res, next){
     function(usuario) {
       res.render('usuario/detalhes', {'usuario': usuario});
     },
-    function (err){
-      next(err);
-    }
-);
+		function (err){
+		  next(err);
+		}
+	);
 };
+
+module.exports.login = function(req,res,next){
+  if(req.query.id){
+    Usuario.findOne(
+    {"_id": req.query.id}).then(
+      function(usuario) {
+        req.session.usuarioLogado = usuario;
+        res.redirect('/index.html');
+      },
+      function (err){
+        next(err);
+      }
+    );
+  }else{
+    res.redirect('/index.html');
+  }
+}
+module.exports.logout = function(req,res,next){
+  req.session.usuarioLogado = null;
+  res.redirect('/index.html');
+}

@@ -4,6 +4,6 @@ module.exports.principal = function(req,res,next){
     {rota:"index.html",link :"/index.html"},
     {rota:"Sobre",link :"/sobre.html"},
 	{rota:"Usuario",link :"/usuario.html"},
-	{rota:"Compras",link :"/compras.html"},
+	{rota:"Compras",link :"/compras/listar_compras.html"},
   ]})
 }

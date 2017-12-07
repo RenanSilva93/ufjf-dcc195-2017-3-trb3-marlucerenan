@@ -3,26 +3,23 @@
   <title>Trabalho 3</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/basic.css">
 </head>
 <body>
 <%if(usuarioLogado){%>
         <h5>Logado como: <%=usuarioLogado.nome%></h5>
     <%}%>
-    <a href="/index.html">Home</a>
+<center>
     <h1>Lista de compras</h1>
-    <table border="1">
+    <table border="2">
       <thead>
         <tr>
-          <td>Nome do compras</td>
-          <td>Preco</td>
-          <td>
-            <form action="/compras/nova_compras.html" method="get">
-              <input type="submit" value="Adicionar"/>
-            </form>
-          </td>
+          <th id="tabela">Compras</th>
+          <th id="tabela">Preco</th>
+		  <th id="tabela"></th>
         </tr>
       </thead>
       <tbody>
@@ -31,16 +28,21 @@
           var compra = compras[i];
         %>
         <tr>
-          <td><%=compra.nome%></td>
-          <td><%=compra.preco%></td>
-          <td><a href="/compras/detalhe_compras.html?id=<%=compras._id%>">Detalhes</a></td>
+          <td id="tabela"><a href="/compras/detalhe_compras.html?id=<%=compras._id%>"><%=compra.nome%></a></td>
+          <td id="tabela"><%=compra.preco%></td>
           <%if(usuarioLogado){%>
-              <td><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
+              <td id="tabela"><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
           <%}%>
         </tr>
       <% } %>
       </tbody>
 </table>
-
+	<br><br>
+	<form action="/compras/nova_compras.html" method="get">
+	  <input type="submit" value="Adicionar"/>
+	</form>
+			
+	  <a class="btn btn-primary" href="/index.html">Home</a>
+</center>
 </body>
 </html>

@@ -1,10 +1,6 @@
-html{
-  width: 400px;
-  background-color: lightgrey;
-  font-family: sans-serif;
-}
 
-body{
-  background-color: white;
-  padding: 1em;
+
+#tabela{
+	padding: 20px 20px 20px 20px;
+	
 }
