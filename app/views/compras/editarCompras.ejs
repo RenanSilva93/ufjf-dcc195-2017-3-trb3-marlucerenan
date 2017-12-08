@@ -10,18 +10,18 @@
 </head>
 <body>
    <%if(usuarioLogado){%>
-        <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
-		<a class="btn btn-primary" href="cliente/logout.html">Logout</a>
+        Logado como: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Logout</a>
     <%}%>
 <center>
-    <h3>Nova Compra</h3> <br><br>
+    <h3>Editar</h3> <br><br>
     <form  method="POST">
-      Nome: <input type="text" name="nome" placeholder="Nome"/> <br><br>
-      Valor: <input type="number" name="preco_base" placeholder="Valor Base"/> <br><br>
-      <input type="hidden" name="somaInteresse" value="0"/>
-      <input type="hidden" name="preco" value="0"/>
-      <input type="hidden" name="numeroInteresse" value="0"/>
-      <input type="submit" value="Adicionar"/>
+      Nome: <input type="text" name="nome" value="<%=compras.nome%>"/> <br><br>
+      Valor: <input type="number" name="preco_base" value="<%=compras.preco_base%>" /> <br><br>
+      <input type="hidden" name="id" value="<%=compras._id%>"/>
+	  <input type="hidden" name="preco" value="<%=compras.preco%>"/>
+
+      <input type="submit" value="Salvar"/>
       <form action="/compras/listar_compras.html" method="get">
       <input type="submit" value="Cancelar"/>
       </form>

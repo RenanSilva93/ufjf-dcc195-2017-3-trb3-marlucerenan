@@ -11,17 +11,16 @@
   <body>
   <%if(usuarioLogado){%>
         <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+		<a class="btn btn-primary" href="usuario/logout.html">Logout</a>
     <%}%>
 <center>
-    <h1>Novo Usuário</h1>
-    <form  method="post">
-      Nome: <input type="text" name="nome" placeholder="Nome"/> <br><br>
-      Email: <input type="email" name="email" placeholder="e-mail"/> <br><br>
-      Senha: <input type="password" name="password" placeholder="senha"/> <br><br>
-      <input type="submit"/>
-      <input type="reset"/>
-    </form>
+    <h1>Editar Usuário</h1>
+    <form  method="POST">
+	  <input type="text" name="nome" value="<%=usuario.nome%>"/>
+	  <input type="email" name="email" value="<%=usuario.email%>" />
+	  <input type="hidden" name="id" value="<%=usuario._id%>"/>
+	  <input type="submit" value="Salvar"/>
+	</form>
 	</center>
   </body>
 </html>

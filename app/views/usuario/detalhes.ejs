@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Detalhes de usuario</title>
-  </head>
+  <html lang="en">
+<head>
+  <title>Trabalho 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/basic.css">
+</head>
   <body>
-    <h1><%=usuario.nome%></h1>
-    <a href="mailto:<%=usuario.email%>"> <%=usuario.email%> </a>
-    <form action="/exclui-usuario.html" method="post">
-      <input type="submit" value="Excluir" />
-      <input type="hidden" name="id" value="<%=usuario.id%>"/>
-    </form>
+  <%if(usuarioLogado){%>
+        <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
+		<a class="btn btn-primary" href="/logout.html">Logout</a>
+    <%}%>
+	<center>
+    Nome: <%=usuario.nome%> <br>
+    E-mail: <a href="mailto:<%=usuario.email%>"> <%=usuario.email%> </a> <br>
+
+	<form action="/usuario/editar.html" method="GET">
+        <input type="submit" value="Editar" />
+        <input type="hidden" name="id" value="<%=usuario._id%>"/>
+	</form>
+
+	<form action="/usuario/exclui-usuario.html" method="post">
+              <input type="submit" value="Excluir" />
+              <input type="hidden" name="id" value="<%=usuario._id%>"/>
+	</form>
+	</center>
   </body>
 </html>

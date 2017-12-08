@@ -10,7 +10,8 @@
 </head>
 <body>
 <%if(usuarioLogado){%>
-        <h5>Logado como: <%=usuarioLogado.nome%></h5>
+        Logado como: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Logout</a>
     <%}%>
 <center>
     <h1>Lista de compras</h1>
@@ -28,10 +29,10 @@
           var compra = compras[i];
         %>
         <tr>
-          <td id="tabela"><a href="/compras/detalhe_compras.html?id=<%=compras._id%>"><%=compra.nome%></a></td>
+          <td id="tabela"><a href="/compras/detalhe_compras.html?id=<%=compra._id%>"><%=compra.nome%></a></td>
           <td id="tabela"><%=compra.preco%></td>
           <%if(usuarioLogado){%>
-              <td id="tabela"><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compras._id%>">Atribuir Interesse</a></td>
+              <td id="tabela"><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compra._id%>">Atribuir Interesse</a></td>
           <%}%>
         </tr>
       <% } %>

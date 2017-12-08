@@ -26,6 +26,11 @@
   </div>
 </nav>
 
+<%if(usuarioLogado){%>
+        <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
+		<a class="btn btn-primary" href="/logout.html">Logout</a>
+    <%}%>
+
 <center>
 <div class="container">
   <h1>Lista de Usuários</h1>
@@ -50,6 +55,9 @@
         <% } %>
       </tbody>
     </table>
+	<br>
+	<a href="/cadastro-usuario.html">Cadastrar</a></td>
+	
 </div>
 </center>
 

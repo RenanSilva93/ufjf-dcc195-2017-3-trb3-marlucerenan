@@ -92,11 +92,45 @@ function salvarCompras(compras){
 module.exports.detalheCompras = function(req,res,next){
     Compras.findOne(
     {"_id": req.query.id}).then(
-      function(Compras) {
-        res.render('compras/detalheCompras', {'compras': Compras, 'usuarioLogado':req.session.usuarioLogado});
+      function(compras) {
+        res.render('compras/detalheCompras', {'compras': compras,'usuarioLogado':req.session.usuarioLogado});
       },
       function (err){
         next(err);
       }
-    );
+);
+}
+
+module.exports.excluirCompras = function(req,res,next){
+    Compras.findByIdAndRemove(
+      req.body.id
+    ).then(
+      function(compras){
+        res.redirect("/compras/listar_compras.html");
+      },
+      function(err){
+        return next(err);
+      }
+    )
+}
+
+module.exports.editarCompras = function(req,res,next){
+    if(req.method=='GET'){
+      Compras.findOne(
+      {"_id": req.query.id}).then(
+        function(compras) {
+          res.render('compras/editarCompras', {'compras': compras,'usuarioLogado':req.session.usuarioLogado});
+        },
+        function (err){
+          next(err);
+        }
+      );
+    }else{
+      Compras.findByIdAndUpdate(req.body.id, { $set: {nome: req.body.nome,preco_base: req.body.preco_base }}, { new: true }, function (err, produto) {
+        if (err) return handleError(err);
+        res.redirect('/compras/listar_compras.html')
+      });
+    }
+
+
 }

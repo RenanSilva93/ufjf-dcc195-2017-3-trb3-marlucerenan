@@ -39,39 +39,45 @@ module.exports.usuarioPorId = function(req, res, next, id){
 };
 
 module.exports.editaUsuario = function(req, res, next){
-  Usuario.findByIdAndUpdate(
-    req.usuario._id,
-    req.body,
-    {new: true}
-  ).then(
-    function (usuario){
-      res.json(usuario);
-    },
-    function(err) {
-      return next(err);
-    }
-  );
+	if(req.method=='GET'){
+      Usuario.findOne(
+      {"_id": req.query.id}).then(
+        function(usuario) {
+          res.render('usuario/editar', {'usuario': usuario,'usuarioLogado':req.session.usuarioLogado});
+        },
+        function (err){
+          next(err);
+        }
+      );
+    }else{
+      Usuario.findByIdAndUpdate(
+	  req.body.id, { 
+	  $set: {nome: req.body.nome,email: req.body.email }}, { new: true }, function (err, usuario) {
+        if (err) return handleError(err);
+        res.redirect('/usuario.html')
+      });
+}
 
 }
 
 module.exports.removeUsuario = function(req, res, next){
   Usuario.findByIdAndRemove(
-    req.usuario._id
-  ).then(
-    function (usuario){
-      res.json(usuario);
-    },
-    function(err) {
-      return next(err);
-    }
-  );
+      req.body.id
+    ).then(
+      function(usuario){
+        res.redirect("/usuario.html");
+      },
+      function(err){
+        return next(err);
+      }
+)
 }
 
 module.exports.listarUsuarioHtml = function(req, res, next){
   Usuario.find({}).then(
     function(usuarios){
       console.log("testesadsadada");
-      res.render('usuario/listar',{usuarios: usuarios, principal : [
+      res.render('usuario/listar',{usuarios: usuarios, 'usuarioLogado':req.session.usuarioLogado, principal : [
     {rota:"HOME/",link :"/"},
     {rota:"index.html",link :"/index.html"},
     {rota:"Sobre",link :"/sobre.html"},
@@ -88,7 +94,7 @@ module.exports.listarUsuarioHtml = function(req, res, next){
 
 module.exports.cadastrarUsuarioHtml = function(req, res, next){
   if(req.method == 'GET'){
-    res.render('usuario/novo');
+    res.render('usuario/novo', {'usuarioLogado':req.session.usuarioLogado});
   }
   else if(req.method == 'POST'){
     var novo = new Usuario(req.body);
@@ -107,7 +113,7 @@ module.exports.detalhesUsuarioHtml = function(req, res, next){
     {"_id": req.query.id})
     .then(
     function(usuario) {
-      res.render('usuario/detalhes', {'usuario': usuario});
+      res.render('usuario/detalhes', {'usuario': usuario, 'usuarioLogado':req.session.usuarioLogado});
     },
 		function (err){
 		  next(err);

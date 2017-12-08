@@ -5,5 +5,5 @@ module.exports.principal = function(req,res,next){
     {rota:"Sobre",link :"/sobre.html"},
 	{rota:"Usuario",link :"/usuario.html"},
 	{rota:"Compras",link :"/compras/listar_compras.html"},
-  ]})
+  ], 'usuarioLogado':req.session.usuarioLogado})
 }
