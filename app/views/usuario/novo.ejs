@@ -6,22 +6,24 @@
   <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
   <body>
   <%if(usuarioLogado){%>
-        <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+        Usuário Atual: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 <center>
-    <h1>Novo Usuário</h1>
+    <h3>Novo Usuário</h3>
     <form  method="post">
       Nome: <input type="text" name="nome" placeholder="Nome"/> <br><br>
       Email: <input type="email" name="email" placeholder="e-mail"/> <br><br>
       Senha: <input type="password" name="password" placeholder="senha"/> <br><br>
-      <input type="submit"/>
-      <input type="reset"/>
+      <input class="btn btn-primary" type="submit" value="Cadastrar"/>
     </form>
+	
+	<br><br>
+	<a class="btn btn-primary" href="/index.html">Home</a>
 	</center>
   </body>
 </html>

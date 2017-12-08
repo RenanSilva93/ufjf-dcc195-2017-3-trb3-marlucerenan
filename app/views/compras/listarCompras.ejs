@@ -6,15 +6,15 @@
   <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
 <%if(usuarioLogado){%>
-        Logado como: <%=usuarioLogado.nome%>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+        Usuário Atual: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 <center>
-    <h1>Lista de compras</h1>
+    <h3>Lista de compras</h3>
     <table border="2">
       <thead>
         <tr>
@@ -32,7 +32,7 @@
           <td id="tabela"><a href="/compras/detalhe_compras.html?id=<%=compra._id%>"><%=compra.nome%></a></td>
           <td id="tabela"><%=compra.preco%></td>
           <%if(usuarioLogado){%>
-              <td id="tabela"><a method="GET" href="/compras/adicionar-interesse.html?id=<%=compra._id%>">Atribuir Interesse</a></td>
+              <td id="tabela"><a method="GET" href="/compras/atribuirInteresse_compras.html?id=<%=compra._id%>">Tenho Interesse</a></td>
           <%}%>
         </tr>
       <% } %>
@@ -40,7 +40,7 @@
 </table>
 	<br><br>
 	<form action="/compras/nova_compras.html" method="get">
-	  <input type="submit" value="Adicionar"/>
+	  <input class="btn btn-primary" type="submit" value="Cadastrar"/>
 	</form>
 			
 	  <a class="btn btn-primary" href="/index.html">Home</a>

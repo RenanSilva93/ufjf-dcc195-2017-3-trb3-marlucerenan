@@ -8,22 +8,30 @@
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/css.css">
 </head>
-  <body>
-  <%if(usuarioLogado){%>
+<body>
+   <%if(usuarioLogado){%>
         Usuário Atual: <%=usuarioLogado.nome%>
 		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 <center>
-    <h3>Editar Usuário</h3>
-    <form  method="POST">
-	  <input type="text" name="nome" value="<%=usuario.nome%>"/>
-	  <input type="email" name="email" value="<%=usuario.email%>" />
-	  <input type="hidden" name="id" value="<%=usuario._id%>"/>
-	  <input class="btn btn-primary" type="submit" value="Salvar"/>
+    <h3>Cadastrar Interesse</h3>
+	  Mercadoria: <%=compras.nome%><br>
+	  Preço: <%=compras.preco%>
+      
+	<form  method="POST">
+	<select name="interesse">
+		<option value="0">Sem interesse</option>
+		<option value="1">Baixo interesse</option>
+		<option value="2">Tenho interesse</option>
+		<option value="3">Muito interesse</option>
+	  </select>
+	  <input class="btn btn-primary" type="submit" value="Confirmar"/>
 	</form>
-	
-	<br><br>
-	<a class="btn btn-primary" href="/index.html">Home</a>
-	</center>
-  </body>
+  
+	<form action="/compras/listarCompras.html" method="get">
+	  <input class="btn btn-primary" type="submit" value="Cancelar"/>
+	</form>
+          
+</center>
+</body>
 </html>

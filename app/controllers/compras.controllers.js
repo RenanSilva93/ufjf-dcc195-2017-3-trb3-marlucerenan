@@ -1,21 +1,10 @@
 var Compras = require('mongoose').model('Compras')
-module.exports.compras = function(req,res,next){
-  if(req.method=='GET'){
-      res.render('compras/compras', {principal : [
-    {rota:"HOME/",link :"/"},
-    {rota:"index.html",link :"/index.html"},
-    {rota:"Sobre",link :"/sobre.html"},
-	{rota:"Usuario",link :"/usuario.html"},
-	{rota:"Compras",link :"/compras.html"},
-  ]});
-  }
-}
 
 module.exports.listarCompras = function(req,res,next){
   Compras.find({}).then(
 
    function(compras){
-    console.log(compras);
+	   atualizarPrecos();
      res.render('compras/listarCompras',
 	 {'compras': compras,'usuarioLogado':req.session.usuarioLogado});
    },
@@ -31,7 +20,7 @@ module.exports.novaCompras = function(req, res, next) {
    var novo = new Compras(req.body);
    novo.save().then(
    function(Compras){
-       calculaPrecos()
+       atualizarPrecos()
        res.redirect("/compras/listar_compras.html");
    },
    function(err){
@@ -40,33 +29,30 @@ module.exports.novaCompras = function(req, res, next) {
  }
 }
 
-function calculaPrecos(){
+function atualizarPrecos(){
   Compras.find({}).then(
-   function(Compras){
-     var maiorInteresse = Compras[0];
-     for(var i in Compras){
-       var compras = Compras[i]
-       if(compras.somaInteresse>maiorInteresse.somaInteresse){
-         maiorInteresse = compras;
+   function(compras){
+     var maiorInteresse = compras[0];
+	 
+     for(var i in compras){ //objeto com maior interesse
+       var compra = compras[i]
+       if(compra.somaInteresse > maiorInteresse.somaInteresse){
+         maiorInteresse = compra;
        }
      }
-     if(maiorInteresse.soma_interesse > 0){
-       for(var i in Compras){
-         var compras = Compras[i]
-         if(compras.somaInteresse > 0){
-           compras.preco = compras.preco_base + compras.preco_base*(compras.somaInteresse/maiorInteresse.somaInteresse);
-           salvarCompras(compras)
-         }else if(compras.somaInteresse == 0&& compras.preco == 0){
-               compras.preco = compras.preco_base;
-               salvarCompras(compras)
-         }
+
+     if(maiorInteresse.somaInteresse > 0){ 
+       for(var i in compras){
+         var compra = compras[i]
+           compra.preco = (1 + compra.somaInteresse/maiorInteresse.somaInteresse) * compra.preco_base;
+           salvarCompras(compra)
        }
      }else{
-       for(var i in Compras){
-         var compras = Compras[i]
-         if(compras.preco == 0){
-           compras.preco = compras.preco_base
-           salvarCompras(compras)
+       for(var i in Compras){ //se for tudo 0, permanece como ta
+         var compra = Compras[i]
+         if(compra.preco == 0){
+           compra.preco = compra.preco_base
+           salvarCompras(compra)
          }
        }
      }
@@ -131,6 +117,50 @@ module.exports.editarCompras = function(req,res,next){
         res.redirect('/compras/listar_compras.html')
       });
     }
+}
 
+module.exports.atribuirInteresseCompras = function(req,res,next){
 
+    if(req.method=="GET"){
+      Compras.findOne(
+      {"_id": req.query.id}).then(
+        function(compras) {
+          req.session.compras = compras;
+          res.render('compras/interesseCompras', {'compras': compras,'usuarioLogado':req.session.usuarioLogado});
+        },
+        function (err){
+          next(err);
+        }
+      );
+    }else{
+        var interesse = req.body.interesse;
+        var valor = 0;
+        if(interesse == 1){
+          valor = 1
+        }else if(interesse == 2){
+			valor = 2
+		  }else if(interesse == 3){
+			  valor = 3;
+			}
+					
+        var compra = req.session.compras;
+		Compras.findOne( 
+		{"_id": compra._id}).then(
+		function(compras) {
+			var soma = compras.somaInteresse + valor;
+			//trouxe o produto
+			//fazer update da soma
+			Compras.findByIdAndUpdate(
+			compras._id, { 
+			$set: {somaInteresse: soma}}, { new: true }, function (err, compras) {
+			//if (err) return handleError(err);
+				atualizarPrecos();
+				res.redirect("/compras/listar.html")
+			});
+		},
+		function (err){
+			next(err);
+			}
+		);
+	}
 }

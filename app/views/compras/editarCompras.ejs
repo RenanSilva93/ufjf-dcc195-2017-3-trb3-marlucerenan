@@ -6,12 +6,12 @@
   <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
    <%if(usuarioLogado){%>
-        Logado como: <%=usuarioLogado.nome%>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+        Usuário Atual: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 <center>
     <h3>Editar</h3> <br><br>
@@ -21,9 +21,9 @@
       <input type="hidden" name="id" value="<%=compras._id%>"/>
 	  <input type="hidden" name="preco" value="<%=compras.preco%>"/>
 
-      <input type="submit" value="Salvar"/>
+      <input class="btn btn-primary" type="submit" value="Salvar"/>
       <form action="/compras/listar_compras.html" method="get">
-      <input type="submit" value="Cancelar"/>
+      <input class="btn btn-primary" type="submit" value="Cancelar"/>
       </form>
     </form>
 </center>

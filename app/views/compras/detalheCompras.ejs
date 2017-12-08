@@ -6,12 +6,12 @@
   <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
  <body>
     <%if(usuarioLogado){%>
-        Logado como: <%=usuarioLogado.nome%>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+        Usuário Atual: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 	<center>
     <h3>Detalhes da Compra</h3>
@@ -21,28 +21,16 @@
         Preco: <%=compras.preco%>
              
         <form action="/compras/excluir_compras.html" method="post">
-          <input type="submit" value="Excluir" />
+          <input class="btn btn-primary" type="submit" value="Excluir" />
           <input type="hidden" name="id" value="<%=compras._id%>"/>
         </form>
 
         <form action="/compras/editar_compras.html" method="GET">
-          <input type="submit" value="Editar" />
+          <input class="btn btn-primary" type="submit" value="Editar" />
           <input type="hidden" name="id" value="<%=compras._id%>"/>
         </form>
 
-    <table border="1">
-    <tr>
-      <td id="tabela">Usuário</td>
-      <td id="tabela">Interesse</td>
-    </tr>
-    <%for(var i in compras.interesses){
-          var interessado = compras.interesses[i]%>
-          <tr>
-            <td id="tabela"><%=interessado.usuario%></td>
-            <td id="tabela"><%=interessado.valor%></td>
-          </tr>
-     <%}%>
-    </table>
+    
 	<br>
     Soma: <%=compras.somaInteresse%>
 	

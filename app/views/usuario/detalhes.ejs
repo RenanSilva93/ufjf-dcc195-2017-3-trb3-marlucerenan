@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
   <body>
   <%if(usuarioLogado){%>
-        <h5>Logado como: <%=usuarioLogado.nome%></h5><br>
-		<a class="btn btn-primary" href="/logout.html">Logout</a>
+        Usuário Atual: <%=usuarioLogado.nome%>
+		<a class="btn btn-primary" href="/logout.html">Sair</a>
     <%}%>
 	<center>
     Nome: <%=usuario.nome%> <br>
@@ -23,11 +23,16 @@
         <input type="submit" value="Editar" />
         <input type="hidden" name="id" value="<%=usuario._id%>"/>
 	</form>
-
+	
+	<br>
+	
 	<form action="/usuario/exclui-usuario.html" method="post">
-              <input type="submit" value="Excluir" />
-              <input type="hidden" name="id" value="<%=usuario._id%>"/>
+	  <input class="brn btn-primary" type="submit" value="Excluir" />
+	  <input type="hidden" name="id" value="<%=usuario._id%>"/>
 	</form>
+	
+	<br><br>
+	<a class="btn btn-primary" href="/index.html">Home</a>
 	</center>
   </body>
 </html>
