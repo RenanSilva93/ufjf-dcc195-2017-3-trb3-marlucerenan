@@ -33,18 +33,22 @@ function atualizarPrecos(){
   Compras.find({}).then(
    function(compras){
      var maiorInteresse = compras[0];
+     var menorInteresse = compras[0];
 	 
      for(var i in compras){ //objeto com maior interesse
        var compra = compras[i]
        if(compra.somaInteresse > maiorInteresse.somaInteresse){
          maiorInteresse = compra;
        }
+       if(compra.somaInteresse < menorInteresse.somaInteresse){
+         menorInteresse = compra;
+       }
      }
 
      if(maiorInteresse.somaInteresse > 0){ 
        for(var i in compras){
          var compra = compras[i]
-           compra.preco = (1 + compra.somaInteresse/maiorInteresse.somaInteresse) * compra.preco_base;
+           compra.preco = (1 + (compra.somaInteresse-menorInteresse.somaInteresse)/(maiorInteresse.somaInteresse-menorInteresse.somaInteresse)) * compra.preco_base;
            salvarCompras(compra)
        }
      }else{
